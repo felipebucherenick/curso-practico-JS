@@ -1,4 +1,9 @@
 const list1 = [100, 200, 300, 400, 100000000];
+const list2 = [23, 48, 14, 39, 12, 5, 7, 98, 45, 67, 33];
+const list3 = [
+  1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 6, 6, 2, 2, 3, 4, 4,
+  4, 4, 4, 4, 4, 5, 7, 7, 8, 9, 9,
+];
 
 function calculateAverage(list) {
   /* let sumList = 0;
@@ -21,6 +26,7 @@ function isEven(list) {
 }
 
 function calculateMedian(list) {
+  list.sort((a, b) => a - b);
   const halfList = parseInt(list.length / 2);
   let listMedian;
   if (isEven(list)) {
@@ -33,7 +39,28 @@ function calculateMedian(list) {
   return listMedian;
 }
 
-const average = calculateAverage(list1);
-const median = calculateMedian(list1);
+function calculateMode(list) {
+  const listObject = {};
+  list.map((element) => {
+    if (listObject[element]) {
+      listObject[element] += 1;
+    } else {
+      listObject[element] = 1;
+    }
+  });
+  const listArray = Object.entries(listObject).sort((a, b) => a[1] - b[1]);
+  const listMode = listArray[listArray.length - 1];
+  return listMode[0];
+}
 
-console.log(`El Promedio es : ${average} y la Mediana es : ${median}`);
+console.log(`Lista 1 : ${list1}`);
+console.log(`Lista 2 : ${list2}`);
+console.log(`Lista 3 : ${list3}`);
+
+const average = calculateAverage(list2);
+const median = calculateMedian(list2);
+const mode = calculateMode(list3);
+console.log(
+  `El Promedio de la lista 2 es : ${average} y la Mediana es : ${median}`
+);
+console.log(`La Moda de la lista 3 es : ${mode}`);
